@@ -1,0 +1,756 @@
+fileFormatVersion: 2
+guid: 648e5972ae7b00043aea4919e2805b11
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 4515494327869245406
+    second: BazziBack_0
+  - first:
+      213: 3634145158711394101
+    second: BazziBack_1
+  - first:
+      213: -5913563812093324141
+    second: BazziBack_2
+  - first:
+      213: -7250518872846483936
+    second: BazziBack_3
+  - first:
+      213: 7328749185581320544
+    second: BazziBack_4
+  - first:
+      213: 8938185438899686958
+    second: BazziBack_5
+  - first:
+      213: -5693515641834039249
+    second: BazziBack_6
+  - first:
+      213: -1601729525123609371
+    second: BazziBack_7
+  - first:
+      213: 1087879270825230492
+    second: BazziBack_8
+  - first:
+      213: -2624137589712545860
+    second: BazziBack_9
+  - first:
+      213: 6314727962585759121
+    second: BazziBack_10
+  - first:
+      213: 4633764024036206551
+    second: BazziBack_11
+  - first:
+      213: 1523948279658746031
+    second: BazziBack_12
+  - first:
+      213: -5791579266366068718
+    second: BazziBack_13
+  - first:
+      213: 6264577026145871800
+    second: BazziBack_14
+  - first:
+      213: -7256956513403612244
+    second: BazziBack_15
+  - first:
+      213: -1294103122343041873
+    second: BazziBack_16
+  - first:
+      213: -2367326545677101051
+    second: BazziBack_17
+  - first:
+      213: -8335727340929191237
+    second: BazziBack_18
+  - first:
+      213: -3410833352268544478
+    second: BazziBack_19
+  - first:
+      213: -3308506176555542507
+    second: BazziBack_20
+  - first:
+      213: 8540251085066554366
+    second: BazziBack_21
+  - first:
+      213: -3140065121369201004
+    second: BazziBack_22
+  - first:
+      213: 4077354222126384944
+    second: BazziBack_23
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: BazziBack_0
+      rect:
+        serializedVersion: 2
+        x: 3
+        y: 155
+        width: 58
+        height: 73
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ed700f5ca224aae30800000000000000
+      internalID: 4515494327869245406
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BazziBack_1
+      rect:
+        serializedVersion: 2
+        x: 67
+        y: 157
+        width: 58
+        height: 71
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 53fb23f64c31f6230800000000000000
+      internalID: 3634145158711394101
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BazziBack_2
+      rect:
+        serializedVersion: 2
+        x: 132
+        y: 155
+        width: 56
+        height: 73
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 39492975b0dceeda0800000000000000
+      internalID: -5913563812093324141
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BazziBack_3
+      rect:
+        serializedVersion: 2
+        x: 195
+        y: 157
+        width: 58
+        height: 71
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 02e38b2008bf06b90800000000000000
+      internalID: -7250518872846483936
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BazziBack_4
+      rect:
+        serializedVersion: 2
+        x: 259
+        y: 155
+        width: 58
+        height: 73
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 069028e0e82f4b560800000000000000
+      internalID: 7328749185581320544
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BazziBack_5
+      rect:
+        serializedVersion: 2
+        x: 323
+        y: 156
+        width: 58
+        height: 72
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e2e4f26dc40da0c70800000000000000
+      internalID: 8938185438899686958
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BazziBack_6
+      rect:
+        serializedVersion: 2
+        x: 388
+        y: 155
+        width: 56
+        height: 73
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f281a5570b19cf0b0800000000000000
+      internalID: -5693515641834039249
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BazziBack_7
+      rect:
+        serializedVersion: 2
+        x: 451
+        y: 156
+        width: 58
+        height: 72
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5ec80c4bb7385c9e0800000000000000
+      internalID: -1601729525123609371
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BazziBack_8
+      rect:
+        serializedVersion: 2
+        x: 3
+        y: 79
+        width: 58
+        height: 73
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c908c08de6ce81f00800000000000000
+      internalID: 1087879270825230492
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BazziBack_9
+      rect:
+        serializedVersion: 2
+        x: 67
+        y: 81
+        width: 58
+        height: 71
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cb71f63f3c0359bd0800000000000000
+      internalID: -2624137589712545860
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BazziBack_10
+      rect:
+        serializedVersion: 2
+        x: 132
+        y: 79
+        width: 56
+        height: 73
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 19d762700ab62a750800000000000000
+      internalID: 6314727962585759121
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BazziBack_11
+      rect:
+        serializedVersion: 2
+        x: 195
+        y: 81
+        width: 58
+        height: 71
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7d7a9a144df6e4040800000000000000
+      internalID: 4633764024036206551
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BazziBack_12
+      rect:
+        serializedVersion: 2
+        x: 259
+        y: 79
+        width: 58
+        height: 73
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fa09029d2e6262510800000000000000
+      internalID: 1523948279658746031
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BazziBack_13
+      rect:
+        serializedVersion: 2
+        x: 323
+        y: 80
+        width: 58
+        height: 72
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 218abb3a75d20afa0800000000000000
+      internalID: -5791579266366068718
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BazziBack_14
+      rect:
+        serializedVersion: 2
+        x: 388
+        y: 79
+        width: 56
+        height: 73
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8b76f773d9f30f650800000000000000
+      internalID: 6264577026145871800
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BazziBack_15
+      rect:
+        serializedVersion: 2
+        x: 451
+        y: 80
+        width: 58
+        height: 72
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ca3de14008c1a4b90800000000000000
+      internalID: -7256956513403612244
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BazziBack_16
+      rect:
+        serializedVersion: 2
+        x: 3
+        y: 3
+        width: 58
+        height: 73
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fa4e402111c6a0ee0800000000000000
+      internalID: -1294103122343041873
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BazziBack_17
+      rect:
+        serializedVersion: 2
+        x: 67
+        y: 5
+        width: 58
+        height: 71
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5085091ac01952fd0800000000000000
+      internalID: -2367326545677101051
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BazziBack_18
+      rect:
+        serializedVersion: 2
+        x: 132
+        y: 3
+        width: 56
+        height: 73
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bb27763e52c815c80800000000000000
+      internalID: -8335727340929191237
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BazziBack_19
+      rect:
+        serializedVersion: 2
+        x: 195
+        y: 5
+        width: 58
+        height: 71
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2268af133294aa0d0800000000000000
+      internalID: -3410833352268544478
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BazziBack_20
+      rect:
+        serializedVersion: 2
+        x: 259
+        y: 3
+        width: 58
+        height: 73
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 51898316923d512d0800000000000000
+      internalID: -3308506176555542507
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BazziBack_21
+      rect:
+        serializedVersion: 2
+        x: 323
+        y: 4
+        width: 58
+        height: 72
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: efb490a1d11158670800000000000000
+      internalID: 8540251085066554366
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BazziBack_22
+      rect:
+        serializedVersion: 2
+        x: 388
+        y: 3
+        width: 56
+        height: 73
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 496e13da86f3c64d0800000000000000
+      internalID: -3140065121369201004
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BazziBack_23
+      rect:
+        serializedVersion: 2
+        x: 451
+        y: 4
+        width: 58
+        height: 72
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0374841ff0ca59830800000000000000
+      internalID: 4077354222126384944
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 34fb30992bae7854cbcf20045f7de36b
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries:
+      - key: SpriteEditor.SliceSettings
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":64.0,"y":64.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":7,"slicingType":0,"keepEmptyRects":false,"isAlternate":false}'
+    nameFileIdTable:
+      BazziBack_0: 4515494327869245406
+      BazziBack_1: 3634145158711394101
+      BazziBack_10: 6314727962585759121
+      BazziBack_11: 4633764024036206551
+      BazziBack_12: 1523948279658746031
+      BazziBack_13: -5791579266366068718
+      BazziBack_14: 6264577026145871800
+      BazziBack_15: -7256956513403612244
+      BazziBack_16: -1294103122343041873
+      BazziBack_17: -2367326545677101051
+      BazziBack_18: -8335727340929191237
+      BazziBack_19: -3410833352268544478
+      BazziBack_2: -5913563812093324141
+      BazziBack_20: -3308506176555542507
+      BazziBack_21: 8540251085066554366
+      BazziBack_22: -3140065121369201004
+      BazziBack_23: 4077354222126384944
+      BazziBack_3: -7250518872846483936
+      BazziBack_4: 7328749185581320544
+      BazziBack_5: 8938185438899686958
+      BazziBack_6: -5693515641834039249
+      BazziBack_7: -1601729525123609371
+      BazziBack_8: 1087879270825230492
+      BazziBack_9: -2624137589712545860
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

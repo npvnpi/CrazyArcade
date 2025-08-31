@@ -1,0 +1,158 @@
+using Unity.IO.LowLevel.Unsafe;
+using UnityEngine;
+using UnityEngine.InputSystem;
+using UnityEngine.U2D;
+
+public class PlayerController : MonoBehaviour
+{
+    public TileMapManager TileMapManager { get; set; }
+
+    private Define.CreatureState creatureState = Define.CreatureState.Idle;
+    private Define.Direction direction = Define.Direction.Down;
+    [SerializeField]
+    private float speed = 3.0f;
+    [SerializeField] private Animator animator;
+
+    private int _currentStateHash = 0;
+
+    // 상태 이름은 Animator 상태 이름과 동일해야 함
+    private const string IdleState = "Bazzi1IdleAnimation";   // 너의 Idle 이름에 맞게 수정
+    private const string MoveFrontState = "Bazzi1FrontAnimation";
+    private const string MoveBackState = "Bazzi1BackAnimation";
+    private const string MoveLeftState = "Bazzi1LeftAnimation";
+    private const string MoveRightState = "Bazzi1RightAnimation";
+
+    void Awake()
+    {
+        if (!animator) animator = GetComponent<Animator>();
+    }
+
+    void Start()
+    {
+
+    }
+
+    void Update()
+    {
+        ReadInputWithKeys();
+        UpdateFSM();        
+    }
+
+    private void ReadInputWithKeys() 
+    {
+        var k = Keyboard.current;
+        if (k == null) return;
+
+        bool isMoving = false;
+
+        if (k.leftArrowKey.isPressed)
+        {
+            creatureState = Define.CreatureState.Move;
+            direction = Define.Direction.Left;
+            isMoving = true;
+        }
+        else if (k.rightArrowKey.isPressed)
+        {
+            creatureState = Define.CreatureState.Move;
+            direction = Define.Direction.Right;
+            isMoving = true;
+        }
+        else if (k.upArrowKey.isPressed)
+        {
+            creatureState = Define.CreatureState.Move;
+            direction = Define.Direction.Up;
+            isMoving = true;
+        }
+        else if (k.downArrowKey.isPressed)
+        {
+            creatureState = Define.CreatureState.Move;
+            direction = Define.Direction.Down;
+            isMoving = true;
+        }
+
+        if (!isMoving)
+        {
+            creatureState = Define.CreatureState.Idle;
+        }
+    }
+
+    private void UpdateFSM() 
+    {
+        switch (creatureState) 
+        {
+            case Define.CreatureState.Idle:
+                UpdateIdle();
+                break;
+
+            case Define.CreatureState.Move:
+                UpdateMove();
+                break;
+        }
+
+        UpdateAnimation();
+    }
+
+    private void UpdateIdle()
+    {
+        
+    }
+
+    private void UpdateMove() 
+    {
+        // 실제로 움직임 
+        Vector2 nowPos = transform.position;
+        Vector2 dirVector2 = Vector2.up;
+
+        if (direction == Define.Direction.Right) { dirVector2 = Vector2.right; }
+        else if (direction == Define.Direction.Up) { dirVector2 = Vector2.up; }
+        else if (direction == Define.Direction.Down) { dirVector2 = Vector2.down; }
+        else if (direction == Define.Direction.Left) { dirVector2 = Vector2.left; }
+        Vector2 nextPos = nowPos + (dirVector2 * Time.deltaTime * speed);           
+        Vector2Int nextIndex = TileMapManager.ConvertWorldPosToLogicPos(nextPos);
+
+        Debug.Log(nextIndex);
+        if (!TileMapManager.InBounds(nextIndex.x, nextIndex.y))
+            return;
+
+        transform.position = nextPos;
+    }
+
+    private void UpdateAnimation()
+    {
+        if (creatureState == Define.CreatureState.Idle)
+        {
+            // 마지막 프레임 멈춤 이미지 
+            animator.speed = 0f;
+        }
+        else 
+        {
+            animator.speed = 1f;
+            // 1) 현재 FSM/방향 → 재생할 상태 이름
+            string nextStateName = GetAnimStateName(creatureState, direction);
+
+            // 2) 같은 상태면 아무 것도 하지 않음 (리셋 방지)
+            int nextHash = Animator.StringToHash(nextStateName);
+            if (_currentStateHash == nextHash) return;
+
+            // 3) 부드럽게 전환
+            animator.CrossFade(nextHash, 0.08f, 0, 0f); // 0.08초 페이드, Layer 0
+            _currentStateHash = nextHash;
+        }
+    }
+
+    private static string GetAnimStateName(Define.CreatureState st, Define.Direction dir)
+    {
+        if (st == Define.CreatureState.Idle)
+            return IdleState; // Idle을 방향별로 보여주고 싶다면 아래처럼 분기하면 됨
+
+        // Move
+        return dir switch
+        {
+            Define.Direction.Down => MoveFrontState,
+            Define.Direction.Up => MoveBackState,
+            Define.Direction.Left => MoveLeftState,
+            Define.Direction.Right => MoveRightState,
+            _ => MoveFrontState
+        };
+    }
+}
