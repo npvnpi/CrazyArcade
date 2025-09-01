@@ -1,7 +1,10 @@
+using Mono.Cecil;
+using System;
 using Unity.IO.LowLevel.Unsafe;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.U2D;
+using static UnityEditor.PlayerSettings;
 
 public class PlayerController : MonoBehaviour
 {
@@ -45,6 +48,22 @@ public class PlayerController : MonoBehaviour
 
         bool isMoving = false;
 
+        if (k.spaceKey.isPressed)
+        {
+            TileMapInfo tileInfo = TileMapManager.GetCell(transform.position);
+            if (tileInfo != null)
+            {
+                // ÀÌ¹Ì ÆøÅºÀÌ ÀÖ´Â°Å´Ï±ñ ¼³Ä¡ ¸øÇÔ
+                return;
+            }
+            else 
+            {
+                // ÆøÅº ¼³Ä¡ °¡´É...
+                BoomSet();
+            }
+        }
+
+
         if (k.leftArrowKey.isPressed)
         {
             creatureState = Define.CreatureState.Move;
@@ -74,6 +93,13 @@ public class PlayerController : MonoBehaviour
         {
             creatureState = Define.CreatureState.Idle;
         }
+    }
+
+    private void BoomSet()
+    {
+        Vector2 tilePos = TileMapManager.ConvertWorldPosToTilePos(transform.position);
+        GameObject boomPrefabs = Resources.Load<GameObject>("Prefabs/Boom");
+        GameObject instance = Instantiate(boomPrefabs, new Vector2(tilePos.x + 0.5f, tilePos.y + 0.5f), Quaternion.identity);
     }
 
     private void UpdateFSM() 

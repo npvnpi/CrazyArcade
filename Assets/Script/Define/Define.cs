@@ -19,6 +19,8 @@ public class Define
     public enum TileMapInfomation
     {
         Empty,
-        WALL
+        WALL,
+        Boom,
+        Explosion
     }
 }

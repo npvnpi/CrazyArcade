@@ -14,7 +14,7 @@ public class TileMapManager : MonoBehaviour
     public const int WIDTH = X_MAX - X_MIN + 1;  
     public const int HEIGHT = Y_MAX - Y_MIN + 1;  
 
-    private TileMapInfo[,] tileMapInfos = new TileMapInfo[HEIGHT, WIDTH]; // [y, x]
+    public TileMapInfo[,] tileMapInfos = new TileMapInfo[HEIGHT, WIDTH]; // [y, x]
 
     void Start()
     {
@@ -56,6 +56,12 @@ public class TileMapManager : MonoBehaviour
         return tileMapInfos[y, x];
     }
 
+    public TileMapInfo GetCell(Vector3 pos)
+    {
+        Vector2Int boardPos = ConvertWorldPosToLogicPos(pos);
+        return tileMapInfos[boardPos.y, boardPos.x];
+    }
+
     public void SetCell(int x, int y, TileMapInfo info)
     {
         if (!InBounds(x, y)) return;
@@ -68,6 +74,19 @@ public class TileMapManager : MonoBehaviour
         int convertX = ret.x - originCell.x;
         int convertY = ret.y - originCell.y;
         return new Vector2Int(convertX, convertY);
+    }
+
+    public Vector2Int ConvertWorldPosToTilePos(Vector2 pos)
+    {
+        Vector3Int ret = tilemap.WorldToCell(pos);
+        return new Vector2Int(ret.x, ret.y);
+    }
+
+    public Vector2 ConvertTilePosToWorldPos(Vector2 pos) 
+    {
+        float convertX = pos.x + originCell.x;
+        float convertY = pos.y + originCell.y;
+        return new Vector2(convertX, convertY);
     }
 
     public Vector2Int ConvertLogicPosToTilePos(Vector2Int pos) 
