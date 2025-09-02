@@ -16,6 +16,7 @@ public class BoomController : MonoBehaviour
         Vector2Int tilePos = TileMapManager.ConvertWorldPosToLogicPos(transform.position);
         TileMapManager.tileMapInfos[tilePos.y, tilePos.x] = new TileMapInfo(Define.TileMapInfomation.Boom);
         _logicPos = tilePos;
+        BombRegistry.Register(this, _logicPos);
         StartCoroutine(CoFuse());
     }
 
@@ -26,20 +27,25 @@ public class BoomController : MonoBehaviour
 
     private IEnumerator CoFuse()
     {
-        float t = 0f;
-        while (t < fuseSeconds && !_exploded)
-        {
-            t += Time.deltaTime;
-            yield return null;
-        }
+        yield return new WaitForSeconds(fuseSeconds);
         Explode();
     }
+
+    // 체인 반응용: 즉시 폭발
+    public void TriggerChain()
+    {
+        if (_exploded) return;
+        StopAllCoroutines(); // 남은 도화선 무효화
+        Explode();
+    }
+
 
     private void Explode()
     {
         if (_exploded) return;
         _exploded = true;
 
+        BombRegistry.Unregister(_logicPos, this);
         // 타일 마킹 되돌리기(폭탄 제거)
         TileMapManager.SetCell(_logicPos.x, _logicPos.y, new TileMapInfo(Define.TileMapInfomation.Empty));
 
@@ -66,9 +72,17 @@ public class BoomController : MonoBehaviour
         for (int i = 1; i <= blastRange; i++) 
         {
             var p = _logicPos + (dir * i);
-            Debug.Log(p);
+   
             if (TileMapManager.IsHardBlock(p)) 
                 break;
+
+            // ① 그 칸에 폭탄이 있으면 즉시 체인 유발
+            if (BombRegistry.TryGet(p, out var otherBomb))
+            {
+                otherBomb.TriggerChain();
+                break;
+            }
+
 
             string prefabPath = "";
 
