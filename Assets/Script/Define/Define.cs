@@ -20,6 +20,7 @@ public class Define
     {
         Empty,
         WALL,
+        HardWall,
         Boom,
         Explosion
     }

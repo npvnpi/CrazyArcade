@@ -16,6 +16,17 @@ public class TileMapManager : MonoBehaviour
 
     public TileMapInfo[,] tileMapInfos = new TileMapInfo[HEIGHT, WIDTH]; // [y, x]
 
+    private void Awake()
+    {
+        for (int y = 0; y < HEIGHT; y++) 
+        {
+            for (int x = 0; x < WIDTH; x++) 
+            {
+                tileMapInfos[y, x] = new TileMapInfo(Define.TileMapInfomation.Empty);
+            }
+        }
+    }
+
     void Start()
     {
         for (int y = 0; y < HEIGHT; y++) 
@@ -68,6 +79,12 @@ public class TileMapManager : MonoBehaviour
         tileMapInfos[y, x] = info;
     }
 
+    public void SetCell(Vector2Int pos, TileMapInfo info)
+    {
+        if (!InBounds(pos.x, pos.y)) return;
+        tileMapInfos[pos.y, pos.x] = info;
+    }
+
     public Vector2Int ConvertWorldPosToLogicPos(Vector2 pos) 
     {
         Vector3Int ret = tilemap.WorldToCell(pos); 
@@ -93,5 +110,31 @@ public class TileMapManager : MonoBehaviour
     {
         Vector2Int tileVector = new Vector2Int(pos.x + originCell.x, pos.y + originCell.y);
         return tileVector;
+    }
+
+    public Vector2 ConvertLogicPosToWorldPos(Vector2Int pos)
+    {
+        Vector2 tilePos = ConvertTilePosToWorldPos(pos);
+        return new Vector2(tilePos.x + 0.5f, tilePos.y + 0.5f);
+    }
+
+    public bool IsHardBlock(Vector2Int pos) 
+    {
+        if (!InBounds(pos.x, pos.y))
+            return true;
+
+        TileMapInfo info = tileMapInfos[pos.y, pos.x];
+
+        if (info == null)
+            return false;
+
+        if (info.TileMapInfomation == Define.TileMapInfomation.HardWall)
+        {
+            return true;
+        }
+        else 
+        {
+            return false;
+        }
     }
 }

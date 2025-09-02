@@ -51,9 +51,9 @@ public class PlayerController : MonoBehaviour
         if (k.spaceKey.isPressed)
         {
             TileMapInfo tileInfo = TileMapManager.GetCell(transform.position);
-            if (tileInfo != null)
+            if (tileInfo.TileMapInfomation != Define.TileMapInfomation.Empty)
             {
-                // ÀÌ¹Ì ÆøÅºÀÌ ÀÖ´Â°Å´Ï±ñ ¼³Ä¡ ¸øÇÔ
+                // ºó°÷¿¡¸¸ ÆøÅº ¼³Ä¡ °¡´É
                 return;
             }
             else 
@@ -136,7 +136,6 @@ public class PlayerController : MonoBehaviour
         Vector2 nextPos = nowPos + (dirVector2 * Time.deltaTime * speed);           
         Vector2Int nextIndex = TileMapManager.ConvertWorldPosToLogicPos(nextPos);
 
-        Debug.Log(nextIndex);
         if (!TileMapManager.InBounds(nextIndex.x, nextIndex.y))
             return;
 

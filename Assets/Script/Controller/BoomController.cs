@@ -46,25 +46,71 @@ public class BoomController : MonoBehaviour
         // 사운드
         // if (sfxExplode) sfxExplode.Play();
 
+
+        GameObject spreadCenterPrefab = Resources.Load<GameObject>("Prefabs/SpreadCenter");
         // 중앙 화염
-        // SpawnFlame(flameCenterPrefab, _logicPos, FlameKind.Center);
+        SpawnFlame(spreadCenterPrefab, _logicPos);
 
         // 네 방향으로 레이 쏘듯 확장
-        // Spread(Vector2Int.up);
-        // Spread(Vector2Int.down);
-        // Spread(Vector2Int.left);
-        // Spread(Vector2Int.right);
+        Spread(Vector2Int.up);
+        Spread(Vector2Int.down);
+        Spread(Vector2Int.left);
+        Spread(Vector2Int.right);
 
         // 폭탄 본체 삭제 (효과는 코루틴으로 알아서 사라짐)
         Destroy(gameObject);
     }
 
-    private void SpawnFlame(GameObject prefab, Vector2Int logicPos) 
+    private void Spread(Vector2Int dir) 
     {
-        if (!prefab) return;
+        for (int i = 1; i <= blastRange; i++) 
+        {
+            var p = _logicPos + (dir * i);
+            Debug.Log(p);
+            if (TileMapManager.IsHardBlock(p)) 
+                break;
 
-        Vector2 world = TileMapManager.ConvertTilePosToWorldPos(logicPos);
-        Vector3 pos = new Vector3(world.x + 0.5f, world.y + 0.5f, 0f);
+            string prefabPath = "";
+
+            if (dir == Vector2Int.up)
+            {
+                prefabPath = "SpreadUp";
+            }
+            else if (dir == Vector2Int.down)
+            {
+                prefabPath = "SpreadDown";
+            }
+            else if (dir == Vector2Int.left) 
+            {
+                prefabPath = "SpreadLeft";
+            }
+            else if (dir == Vector2Int.right)
+            {
+                prefabPath = "SpreadRight";
+            }
+
+            var prefab = Resources.Load<GameObject>($"Prefabs/{prefabPath}");
+            var flame = SpawnFlame(prefab, p);
+
+            //if (TileMapManager.IsBreakable(p))
+            //{
+            //    TileMapManager.Break(p);
+            //    break;
+            //}
+        }
+    }
+
+    private FlameController SpawnFlame(GameObject prefab, Vector2Int logicPos) 
+    {
+        if (!prefab) 
+            return null;
+        Vector2 worldPos = TileMapManager.ConvertLogicPosToWorldPos(logicPos);
+        // Debug.Log(worldPos);
+        GameObject spreadFlame = Instantiate(prefab, worldPos, Quaternion.identity);
+        FlameController fc = spreadFlame.GetComponent<FlameController>();
+        fc.Init(TileMapManager, logicPos, flameDuration);
+
+        return fc;
     }
 
 
