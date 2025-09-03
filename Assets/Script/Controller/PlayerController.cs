@@ -16,6 +16,8 @@ public class PlayerController : MonoBehaviour
     private float speed = 3.0f;
     [SerializeField] private Animator animator;
 
+    private Vector2Int prevPos = Vector2Int.zero;
+
     private int _currentStateHash = 0;
 
     // 상태 이름은 Animator 상태 이름과 동일해야 함
@@ -100,6 +102,8 @@ public class PlayerController : MonoBehaviour
         Vector2 tilePos = TileMapManager.ConvertWorldPosToTilePos(transform.position);
         GameObject boomPrefabs = Resources.Load<GameObject>("Prefabs/Boom");
         GameObject instance = Instantiate(boomPrefabs, new Vector2(tilePos.x + 0.5f, tilePos.y + 0.5f), Quaternion.identity);
+        BoomController bc = instance.GetComponent<BoomController>();
+        bc.Owner = gameObject; // 폭탄의 소유권
     }
 
     private void UpdateFSM() 
@@ -128,6 +132,7 @@ public class PlayerController : MonoBehaviour
         // 실제로 움직임 
         Vector2 nowPos = transform.position;
         Vector2 dirVector2 = Vector2.up;
+        Vector2Int prevLogicPos = TileMapManager.ConvertWorldPosToLogicPos(nowPos);
 
         if (direction == Define.Direction.Right) { dirVector2 = Vector2.right; }
         else if (direction == Define.Direction.Up) { dirVector2 = Vector2.up; }
@@ -139,7 +144,26 @@ public class PlayerController : MonoBehaviour
         if (!TileMapManager.InBounds(nextIndex.x, nextIndex.y))
             return;
 
+        if (BombRegistry.TryGet(nextIndex, out var bomb)) 
+        {
+            if (bomb.Owner != gameObject || !bomb.Penetration) 
+            {
+                return;
+            }
+        }
         transform.position = nextPos;
+        Vector2Int nowLogicPos = TileMapManager.ConvertWorldPosToLogicPos(nextPos);
+
+        if (prevLogicPos != nowLogicPos) 
+        {
+            if (BombRegistry.TryGet(prevLogicPos, out var prevBomb)) 
+            {
+                if (prevBomb.Owner == gameObject && prevBomb.Penetration) 
+                {
+                    prevBomb.Penetration = false;
+                }
+            }
+        }
     }
 
     private void UpdateAnimation()

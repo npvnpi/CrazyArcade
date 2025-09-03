@@ -10,6 +10,9 @@ public class BoomController : MonoBehaviour
     private bool _exploded;
     private Vector2Int _logicPos = new Vector2Int(0,0);
 
+    public GameObject Owner { get; set; }
+    public bool Penetration { get; set; } = true;
+
     void Start()
     {
         if (!TileMapManager) TileMapManager = FindAnyObjectByType<TileMapManager>();
