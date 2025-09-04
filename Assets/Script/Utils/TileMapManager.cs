@@ -29,13 +29,93 @@ public class TileMapManager : MonoBehaviour
 
     void Start()
     {
-        for (int y = 0; y < HEIGHT; y++) 
+
+            //public TileBase boxTile;         // 1
+            //public TileBase orangeTile;      // 2
+            //public TileBase redTile;         // 3
+            //public TileBase redHouseTile;    // 4
+            //public TileBase yellowHouseTile; // 5
+            //public TileBase blueHouseTile;   // 6
+            //public TileBase treeTile;        // 7
+
+    int[,] Map =
+       {
+            // y=0
+            {0,0,1,1,1,1,1,2,3,3,3,1,1,1,1,1,0,0},
+            // y=1
+            {0,0,1,1,2,1,1,4,1,5,1,6,1,1,2,1,0,0},
+            // y=2
+            {1,1,1,1,1,1,1,2,3,1,1,2,1,2,1,1,1,1},
+            // y=3
+            {1,2,2,1,1,1,1,7,1,1,7,1,1,1,1,2,2,1},
+            // y=4
+            {1,2,1,1,1,1,0,0,0,0,0,0,1,1,1,1,2,1},
+            // y=5
+            {1,1,1,2,1,1,0,0,0,0,0,0,1,1,2,1,1,1},
+            // y=6
+            {1,3,1,1,1,1,7,1,1,1,1,7,1,1,1,1,3,1},
+            // y=7
+            {1,2,2,1,1,1,1,2,3,1,1,1,1,1,2,2,1,1},
+            // y=8
+            {0,0,1,1,6,1,1,5,1,4,1,1,1,1,6,1,0,0},
+            // y=9
+            {0,0,1,1,1,1,1,2,3,3,3,1,1,1,1,1,0,0}
+        };
+
+        for (int y = 0; y < HEIGHT; y++)
         {
-            for (int x = 0; x < WIDTH; x++) 
+            for (int x = 0; x < WIDTH; x++)
             {
-                GameObject TownGround = Resources.Load<GameObject>("Prefabs/TownGround");
-                Vector2 pos = ConvertLogicPosToTilePos(new Vector2Int(x, y));
-                Instantiate(TownGround, pos + new Vector2(0.5f, 0.5f), Quaternion.identity, transform);
+                int data = Map[y, x];
+                if (data == 1)
+                {
+                    GameObject boxBlockPrefab = Resources.Load<GameObject>("Prefabs/BoxBlock");
+                    Vector2 pos = ConvertLogicPosToWorldPos(new Vector2Int(x,y));
+                    WallRegistry.Register(Instantiate(boxBlockPrefab, pos, Quaternion.identity, transform), new Vector2Int(x,y));
+                    tileMapInfos[y, x] = new TileMapInfo(Define.TileMapInfomation.WALL);
+                }
+                else if (data == 2)
+                {
+                    GameObject boxBlockPrefab = Resources.Load<GameObject>("Prefabs/OrangeBlock");
+                    Vector2 pos = ConvertLogicPosToWorldPos(new Vector2Int(x, y));
+                    WallRegistry.Register(Instantiate(boxBlockPrefab, pos, Quaternion.identity, transform), new Vector2Int(x, y));
+                    tileMapInfos[y, x] = new TileMapInfo(Define.TileMapInfomation.WALL);
+                }
+                else if (data == 3)
+                {
+                    GameObject boxBlockPrefab = Resources.Load<GameObject>("Prefabs/RedBlock");
+                    Vector2 pos = ConvertLogicPosToWorldPos(new Vector2Int(x, y));
+                    WallRegistry.Register(Instantiate(boxBlockPrefab, pos, Quaternion.identity, transform), new Vector2Int(x, y));
+                    tileMapInfos[y, x] = new TileMapInfo(Define.TileMapInfomation.WALL);
+                }
+                else if (data == 4)
+                {
+                    GameObject boxBlockPrefab = Resources.Load<GameObject>("Prefabs/RedHouseBlock");
+                    Vector2 pos = ConvertLogicPosToWorldPos(new Vector2Int(x, y));
+                    WallRegistry.Register(Instantiate(boxBlockPrefab, pos, Quaternion.identity, transform), new Vector2Int(x, y));
+                    tileMapInfos[y, x] = new TileMapInfo(Define.TileMapInfomation.HardWall);
+                }
+                else if (data == 5) 
+                {
+                    GameObject boxBlockPrefab = Resources.Load<GameObject>("Prefabs/YellowHouseBlock");
+                    Vector2 pos = ConvertLogicPosToWorldPos(new Vector2Int(x, y));
+                    WallRegistry.Register(Instantiate(boxBlockPrefab, pos, Quaternion.identity, transform), new Vector2Int(x, y));
+                    tileMapInfos[y, x] = new TileMapInfo(Define.TileMapInfomation.HardWall);
+                }
+                else if (data == 6)
+                {
+                    GameObject boxBlockPrefab = Resources.Load<GameObject>("Prefabs/BlueHouseBlock");
+                    Vector2 pos = ConvertLogicPosToWorldPos(new Vector2Int(x, y));
+                    WallRegistry.Register(Instantiate(boxBlockPrefab, pos, Quaternion.identity, transform), new Vector2Int(x, y));
+                    tileMapInfos[y, x] = new TileMapInfo(Define.TileMapInfomation.HardWall);
+                }
+                else if (data == 7)
+                {
+                    GameObject boxBlockPrefab = Resources.Load<GameObject>("Prefabs/Tree2Block");
+                    Vector2 pos = ConvertLogicPosToWorldPos(new Vector2Int(x, y));
+                    WallRegistry.Register(Instantiate(boxBlockPrefab, pos, Quaternion.identity, transform), new Vector2Int(x, y));
+                    tileMapInfos[y, x] = new TileMapInfo(Define.TileMapInfomation.HardWall);
+                }
             }
         }
 

@@ -28,6 +28,11 @@ public class FlameController : MonoBehaviour
 
     private IEnumerator CoFlame()
     {
+        if (WallRegistry.TryGet(_logicPos, out GameObject wall))
+        {
+            Destroy(wall);
+            WallRegistry.Unregister(_logicPos);
+        }
         yield return new WaitForSeconds(_flameDuration);
         ClearTileOnce();
         Destroy(gameObject);
@@ -37,8 +42,9 @@ public class FlameController : MonoBehaviour
     {
         if (_cleared) return;
         _cleared = true;
-        if (TileMapManager != null)
+        if (TileMapManager != null) {
             TileMapManager.SetCell(_logicPos, new TileMapInfo(Define.TileMapInfomation.Empty));
+        }
     }
 
     private void OnDestroy()

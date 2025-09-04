@@ -144,6 +144,12 @@ public class PlayerController : MonoBehaviour
         if (!TileMapManager.InBounds(nextIndex.x, nextIndex.y))
             return;
 
+        TileMapInfo info = TileMapManager.GetCell(nextIndex.x, nextIndex.y);
+        if (info.TileMapInfomation == Define.TileMapInfomation.WALL || info.TileMapInfomation == Define.TileMapInfomation.HardWall) 
+        {
+            return;
+        }
+
         if (BombRegistry.TryGet(nextIndex, out var bomb)) 
         {
             if (bomb.Owner != gameObject || !bomb.Penetration) 
