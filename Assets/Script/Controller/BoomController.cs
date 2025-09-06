@@ -4,7 +4,7 @@ using UnityEngine;
 public class BoomController : MonoBehaviour
 {
     [SerializeField] private float fuseSeconds = 2.5f;        // 도화선 시간
-    [SerializeField] private int blastRange = 1;               // 물줄기 길이(타일 수)
+    [SerializeField] public int blastRange = 1;               // 물줄기 길이(타일 수)
     [SerializeField] private float flameDuration = 0.35f;      // 물줄기 유지 시간
     public TileMapManager TileMapManager { get; set; }
     private bool _exploded;
@@ -71,7 +71,6 @@ public class BoomController : MonoBehaviour
 
         PlayerController pc = Owner.GetComponent<PlayerController>();
         pc.bombCnt += 1;
-        Debug.Log(pc.bombCnt);
     }
 
     private void Spread(Vector2Int dir) 
@@ -110,6 +109,8 @@ public class BoomController : MonoBehaviour
                 prefabPath = "SpreadRight";
             }
 
+            bool stop = TileMapManager.IsWallBlock(p);
+
             var prefab = Resources.Load<GameObject>($"Prefabs/{prefabPath}");
             var flame = SpawnFlame(prefab, p);
 
@@ -118,6 +119,9 @@ public class BoomController : MonoBehaviour
             //    TileMapManager.Break(p);
             //    break;
             //}
+
+            if (stop)
+                break;
         }
     }
 

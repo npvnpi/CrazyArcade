@@ -28,25 +28,25 @@ public class ItemController : MonoBehaviour
         }
         else if (ItemType == Define.ItemInfomation.PowerUpSmall)
         {
-            pc.bombCnt += 1;
+            pc.bombPower += 1;
             Destroy(gameObject);
             ItemRegistry.Unregister(nextIndex);
             TileMapInfo newTileMapInfo = new TileMapInfo(Define.TileMapInfomation.Empty);
             newTileMapInfo.itemInfomation = Define.ItemInfomation.None;
             TileMapManager.tileMapInfos[nextIndex.y, nextIndex.x] = newTileMapInfo;
         }
-        else if (ItemType == Define.ItemInfomation.PowerUpBig)
-        {
-            pc.bombCnt += 1;
-            Destroy(gameObject);
-            ItemRegistry.Unregister(nextIndex);
-            TileMapInfo newTileMapInfo = new TileMapInfo(Define.TileMapInfomation.Empty);
-            newTileMapInfo.itemInfomation = Define.ItemInfomation.None;
-            TileMapManager.tileMapInfos[nextIndex.y, nextIndex.x] = newTileMapInfo;
-        }
+        //else if (ItemType == Define.ItemInfomation.PowerUpBig)
+        //{
+        //    pc.bombPower += 2;
+        //    Destroy(gameObject);
+        //    ItemRegistry.Unregister(nextIndex);
+        //    TileMapInfo newTileMapInfo = new TileMapInfo(Define.TileMapInfomation.Empty);
+        //    newTileMapInfo.itemInfomation = Define.ItemInfomation.None;
+        //    TileMapManager.tileMapInfos[nextIndex.y, nextIndex.x] = newTileMapInfo;
+        //}
         else if (ItemType == Define.ItemInfomation.SpeedUp)
         {
-            pc.bombCnt += 1;
+            pc.speed += 0.2f;
             Destroy(gameObject);
             ItemRegistry.Unregister(nextIndex);
             TileMapInfo newTileMapInfo = new TileMapInfo(Define.TileMapInfomation.Empty);

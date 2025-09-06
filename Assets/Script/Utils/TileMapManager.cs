@@ -30,15 +30,31 @@ public class TileMapManager : MonoBehaviour
     void Start()
     {
 
-            //public TileBase boxTile;         // 1
-            //public TileBase orangeTile;      // 2
-            //public TileBase redTile;         // 3
-            //public TileBase redHouseTile;    // 4
-            //public TileBase yellowHouseTile; // 5
-            //public TileBase blueHouseTile;   // 6
-            //public TileBase treeTile;        // 7
+        var spawnPoints = new Vector2Int[]
+        {
+             new Vector2Int(0, 0),
+             new Vector2Int(17, 0),
+             new Vector2Int(0,9),
+             new Vector2Int(17,9),
+        };
 
-    int[,] Map =
+        var weights = new ItemDistributor.ItemWeight[]
+            {
+        new ItemDistributor.ItemWeight { item = Define.ItemInfomation.PowerUpSmall, weight = 3 },
+        new ItemDistributor.ItemWeight { item = Define.ItemInfomation.BombUp,     weight = 5 },
+        new ItemDistributor.ItemWeight { item = Define.ItemInfomation.SpeedUp,    weight = 2 },
+            };
+
+
+        //public TileBase boxTile;         // 1
+        //public TileBase orangeTile;      // 2
+        //public TileBase redTile;         // 3
+        //public TileBase redHouseTile;    // 4
+        //public TileBase yellowHouseTile; // 5
+        //public TileBase blueHouseTile;   // 6
+        //public TileBase treeTile;        // 7
+
+        int[,] Map =
        {
             // y=0
             {10,0,1,1,1,1,1,2,3,3,3,1,1,1,1,1,0,0},
@@ -73,7 +89,6 @@ public class TileMapManager : MonoBehaviour
                     Vector2 pos = ConvertLogicPosToWorldPos(new Vector2Int(x, y));
                     WallRegistry.Register(Instantiate(boxBlockPrefab, pos, Quaternion.identity, transform), new Vector2Int(x, y));
                     tileMapInfos[y, x] = new TileMapInfo(Define.TileMapInfomation.WALL);
-                    tileMapInfos[y, x].itemInfomation = Define.ItemInfomation.PowerUpBig;
                 }
                 else if (data == 2)
                 {
@@ -81,7 +96,6 @@ public class TileMapManager : MonoBehaviour
                     Vector2 pos = ConvertLogicPosToWorldPos(new Vector2Int(x, y));
                     WallRegistry.Register(Instantiate(boxBlockPrefab, pos, Quaternion.identity, transform), new Vector2Int(x, y));
                     tileMapInfos[y, x] = new TileMapInfo(Define.TileMapInfomation.WALL);
-                    tileMapInfos[y, x].itemInfomation = Define.ItemInfomation.BombUp;
                 }
                 else if (data == 3)
                 {
@@ -89,7 +103,6 @@ public class TileMapManager : MonoBehaviour
                     Vector2 pos = ConvertLogicPosToWorldPos(new Vector2Int(x, y));
                     WallRegistry.Register(Instantiate(boxBlockPrefab, pos, Quaternion.identity, transform), new Vector2Int(x, y));
                     tileMapInfos[y, x] = new TileMapInfo(Define.TileMapInfomation.WALL);
-                    tileMapInfos[y, x].itemInfomation = Define.ItemInfomation.BombUp;
                 }
                 else if (data == 4)
                 {
@@ -135,6 +148,20 @@ public class TileMapManager : MonoBehaviour
                 }
             }
         }
+
+        // 맵 생성 끝난 직후
+        ItemDistributor.DistributeItemsFairly(
+            this,                   // tileMapManager
+            WIDTH, HEIGHT,          // 맵 크기
+            spawnPoints,            // 스폰 위치
+            weights,                // 아이템 비율
+            safeRadiusFromSpawn: 2, // 스폰 근처는 아이템 금지
+            fillRatio: 0.35f,       // 부술 수 있는 벽 중 35%만 아이템
+            seed: 1234,             // 시드 (재현 가능)
+            useSectors: true,       // 섹터 균등 분배
+            sectorRows: 2,
+            sectorCols: 2
+        );
 
 
     }
@@ -223,5 +250,26 @@ public class TileMapManager : MonoBehaviour
         {
             return false;
         }
+    }
+
+    public bool IsWallBlock(Vector2Int pos) 
+    {
+        if (!InBounds(pos.x, pos.y))
+            return true;
+
+        TileMapInfo info = tileMapInfos[pos.y, pos.x];
+
+        if (info == null)
+            return false;
+
+        if (info.TileMapInfomation == Define.TileMapInfomation.WALL)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+
     }
 }

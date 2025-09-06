@@ -13,9 +13,10 @@ public class PlayerController : MonoBehaviour
     private Define.CreatureState creatureState = Define.CreatureState.Idle;
     private Define.Direction direction = Define.Direction.Down;
     [SerializeField]
-    private float speed = 3.0f;
+    public float speed = 3.0f;
     [SerializeField] private Animator animator;
     [SerializeField] public int bombCnt = 1;
+    [SerializeField] public int bombPower = 1;
 
     private Vector2Int prevPos = Vector2Int.zero;
 
@@ -102,11 +103,11 @@ public class PlayerController : MonoBehaviour
     {
         if (bombCnt <= 0) { return; }
         bombCnt -= 1;
-        Debug.Log(bombCnt);
         Vector2 tilePos = TileMapManager.ConvertWorldPosToTilePos(transform.position);
         GameObject boomPrefabs = Resources.Load<GameObject>("Prefabs/Boom");
         GameObject instance = Instantiate(boomPrefabs, new Vector2(tilePos.x + 0.5f, tilePos.y + 0.5f), Quaternion.identity);
         BoomController bc = instance.GetComponent<BoomController>();
+        bc.blastRange = bombPower;
         bc.Owner = gameObject; // ÆøÅºÀÇ ¼ÒÀ¯±Ç
     }
 
