@@ -57,7 +57,7 @@ public class TileMapManager : MonoBehaviour
         int[,] Map =
        {
             // y=0
-            {10,0,1,1,1,1,1,2,3,3,3,1,1,1,1,1,0,0},
+            {0,0,1,1,1,1,1,2,3,3,3,1,1,1,1,1,0,0},
             // y=1
             {0,0,1,1,2,1,1,4,1,5,1,6,1,1,2,1,0,0},
             // y=2
@@ -75,7 +75,7 @@ public class TileMapManager : MonoBehaviour
             // y=8
             {0,0,1,1,6,1,1,5,1,4,1,1,1,1,6,1,0,0},
             // y=9
-            {0,0,1,1,1,1,1,2,3,3,3,1,1,1,1,1,0,0}
+            {10,0,1,1,1,1,1,2,3,3,3,1,1,1,1,1,0,0}
         };
 
         for (int y = 0; y < HEIGHT; y++)
@@ -173,7 +173,7 @@ public class TileMapManager : MonoBehaviour
 
     public bool InBounds(int x, int y) 
     {
-        return x >= X_MIN && x <= X_MAX && y >= Y_MIN && y < Y_MAX;
+        return x >= X_MIN && x <= X_MAX && y > Y_MIN && y <= Y_MAX;
     }
 
     public TileMapInfo GetCell(int x, int y)
