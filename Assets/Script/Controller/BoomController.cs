@@ -68,6 +68,10 @@ public class BoomController : MonoBehaviour
 
         // 폭탄 본체 삭제 (효과는 코루틴으로 알아서 사라짐)
         Destroy(gameObject);
+
+        PlayerController pc = Owner.GetComponent<PlayerController>();
+        pc.bombCnt += 1;
+        Debug.Log(pc.bombCnt);
     }
 
     private void Spread(Vector2Int dir) 
@@ -122,7 +126,6 @@ public class BoomController : MonoBehaviour
         if (!prefab) 
             return null;
         Vector2 worldPos = TileMapManager.ConvertLogicPosToWorldPos(logicPos);
-        // Debug.Log(worldPos);
         GameObject spreadFlame = Instantiate(prefab, worldPos, Quaternion.identity);
         FlameController fc = spreadFlame.GetComponent<FlameController>();
         fc.Init(TileMapManager, logicPos, flameDuration);

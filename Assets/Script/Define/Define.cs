@@ -22,6 +22,16 @@ public class Define
         WALL,
         HardWall,
         Boom,
-        Explosion
+        Explosion,
+        Item
+    }
+
+    public enum ItemInfomation 
+    {
+        None,
+        BombUp,
+        PowerUpBig,
+        PowerUpSmall,
+        SpeedUp
     }
 }

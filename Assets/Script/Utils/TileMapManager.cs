@@ -41,7 +41,7 @@ public class TileMapManager : MonoBehaviour
     int[,] Map =
        {
             // y=0
-            {0,0,1,1,1,1,1,2,3,3,3,1,1,1,1,1,0,0},
+            {10,0,1,1,1,1,1,2,3,3,3,1,1,1,1,1,0,0},
             // y=1
             {0,0,1,1,2,1,1,4,1,5,1,6,1,1,2,1,0,0},
             // y=2
@@ -70,9 +70,10 @@ public class TileMapManager : MonoBehaviour
                 if (data == 1)
                 {
                     GameObject boxBlockPrefab = Resources.Load<GameObject>("Prefabs/BoxBlock");
-                    Vector2 pos = ConvertLogicPosToWorldPos(new Vector2Int(x,y));
-                    WallRegistry.Register(Instantiate(boxBlockPrefab, pos, Quaternion.identity, transform), new Vector2Int(x,y));
+                    Vector2 pos = ConvertLogicPosToWorldPos(new Vector2Int(x, y));
+                    WallRegistry.Register(Instantiate(boxBlockPrefab, pos, Quaternion.identity, transform), new Vector2Int(x, y));
                     tileMapInfos[y, x] = new TileMapInfo(Define.TileMapInfomation.WALL);
+                    tileMapInfos[y, x].itemInfomation = Define.ItemInfomation.PowerUpBig;
                 }
                 else if (data == 2)
                 {
@@ -80,6 +81,7 @@ public class TileMapManager : MonoBehaviour
                     Vector2 pos = ConvertLogicPosToWorldPos(new Vector2Int(x, y));
                     WallRegistry.Register(Instantiate(boxBlockPrefab, pos, Quaternion.identity, transform), new Vector2Int(x, y));
                     tileMapInfos[y, x] = new TileMapInfo(Define.TileMapInfomation.WALL);
+                    tileMapInfos[y, x].itemInfomation = Define.ItemInfomation.BombUp;
                 }
                 else if (data == 3)
                 {
@@ -87,6 +89,7 @@ public class TileMapManager : MonoBehaviour
                     Vector2 pos = ConvertLogicPosToWorldPos(new Vector2Int(x, y));
                     WallRegistry.Register(Instantiate(boxBlockPrefab, pos, Quaternion.identity, transform), new Vector2Int(x, y));
                     tileMapInfos[y, x] = new TileMapInfo(Define.TileMapInfomation.WALL);
+                    tileMapInfos[y, x].itemInfomation = Define.ItemInfomation.BombUp;
                 }
                 else if (data == 4)
                 {
@@ -95,7 +98,7 @@ public class TileMapManager : MonoBehaviour
                     WallRegistry.Register(Instantiate(boxBlockPrefab, pos, Quaternion.identity, transform), new Vector2Int(x, y));
                     tileMapInfos[y, x] = new TileMapInfo(Define.TileMapInfomation.HardWall);
                 }
-                else if (data == 5) 
+                else if (data == 5)
                 {
                     GameObject boxBlockPrefab = Resources.Load<GameObject>("Prefabs/YellowHouseBlock");
                     Vector2 pos = ConvertLogicPosToWorldPos(new Vector2Int(x, y));
@@ -116,20 +119,24 @@ public class TileMapManager : MonoBehaviour
                     WallRegistry.Register(Instantiate(boxBlockPrefab, pos, Quaternion.identity, transform), new Vector2Int(x, y));
                     tileMapInfos[y, x] = new TileMapInfo(Define.TileMapInfomation.HardWall);
                 }
+                else if (data == 10)
+                {
+                    GameObject prefab = Resources.Load<GameObject>("Prefabs/Bazzi");
+
+                    if (prefab != null)
+                    {
+                        // Vector2 pos = originCell + new Vector2(0.5f, 0.5f);
+                        Vector2 pos = ConvertLogicPosToWorldPos(new Vector2Int(x, y));
+                        GameObject instance = Instantiate(prefab, pos, Quaternion.identity, transform);
+                        PlayerController pc = instance.GetComponent<PlayerController>();
+                        pc.TileMapManager = this;
+                        instance.name = "Bazzi";
+                    }
+                }
             }
         }
 
-        GameObject prefab = Resources.Load<GameObject>("Prefabs/Bazzi");
 
-        if (prefab != null)
-        {
-            Vector2 pos = originCell + new Vector2(0.5f, 0.5f);
-
-            GameObject instance = Instantiate(prefab, pos, Quaternion.identity, transform);
-            PlayerController pc = instance.GetComponent<PlayerController>();
-            pc.TileMapManager = this;
-            instance.name = "Bazzi";
-        }
     }
 
     void Update()
