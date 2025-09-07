@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Linq;
 using UnityEngine;
 
 public class FlameController : MonoBehaviour
@@ -28,7 +29,19 @@ public class FlameController : MonoBehaviour
 
     void Update()
     {
-        
+        // ÇÃ·¹ÀÌ¾î »ï¾Æ Ã¼Å©
+        var playerGos = TileMapManager.PlayerDict.Values.ToArray();
+        foreach (GameObject playerGo in playerGos) 
+        {
+            Vector3 playerPos = playerGo.transform.position;
+            var playerLogciPos = TileMapManager.ConvertWorldPosToLogicPos(playerPos);
+            if (_logicPos == playerLogciPos)
+            {
+                // ÇÃ·¹ÀÌ¾î ¹°Ç³¼± °¤Èû (°ÅÀÇ »ç¸Á Á÷Àü)
+                var pc = playerGo.GetComponent<PlayerController>();
+                pc.Traped();
+            }
+        }
     }
 
     private IEnumerator CoFlame()

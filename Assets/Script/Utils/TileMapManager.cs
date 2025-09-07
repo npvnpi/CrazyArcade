@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Experimental.AI;
 using UnityEngine.Tilemaps;
@@ -13,6 +14,8 @@ public class TileMapManager : MonoBehaviour
     public const int Y_MIN = 0, Y_MAX = 9; 
     public const int WIDTH = X_MAX - X_MIN + 1;  
     public const int HEIGHT = Y_MAX - Y_MIN + 1;  
+
+    public Dictionary<int, GameObject> PlayerDict = new Dictionary<int, GameObject>();
 
     public TileMapInfo[,] tileMapInfos = new TileMapInfo[HEIGHT, WIDTH]; // [y, x]
 
@@ -144,6 +147,7 @@ public class TileMapManager : MonoBehaviour
                         PlayerController pc = instance.GetComponent<PlayerController>();
                         pc.TileMapManager = this;
                         instance.name = "Bazzi";
+                        PlayerDict.Add(1, instance);
                     }
                 }
             }

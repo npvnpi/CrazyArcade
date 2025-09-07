@@ -14,6 +14,8 @@ public class Define
     {
         Idle,
         Move,
+        Traped,
+        Dead
     }
 
     public enum TileMapInfomation

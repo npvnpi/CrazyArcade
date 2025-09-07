@@ -1,5 +1,6 @@
 using Mono.Cecil;
 using System;
+using System.Collections;
 using Unity.IO.LowLevel.Unsafe;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -17,11 +18,13 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Animator animator;
     [SerializeField] public int bombCnt = 1;
     [SerializeField] public int bombPower = 1;
-
+    private bool _didPlayTrapOnce;
+    private bool _didPlayDeadOnce;
     private Vector2Int prevPos = Vector2Int.zero;
 
     private int _currentStateHash = 0;
-
+    private const string trapStateName = "BazziTraap1Animation";
+    private const string deadStateName = "Bazzi1DeadAnimation";
     // 상태 이름은 Animator 상태 이름과 동일해야 함
     private const string IdleState = "Bazzi1IdleAnimation";   // 너의 Idle 이름에 맞게 수정
     private const string MoveFrontState = "Bazzi1FrontAnimation";
@@ -47,6 +50,11 @@ public class PlayerController : MonoBehaviour
 
     private void ReadInputWithKeys() 
     {
+        if (creatureState == Define.CreatureState.Traped || creatureState == Define.CreatureState.Dead) 
+        {
+            return;
+        }
+
         var k = Keyboard.current;
         if (k == null) return;
 
@@ -189,8 +197,26 @@ public class PlayerController : MonoBehaviour
         {
             // 마지막 프레임 멈춤 이미지 
             animator.speed = 0f;
+            _didPlayTrapOnce = false; // 다음에 또 걸릴 수 있으니 초기화
+            _didPlayDeadOnce = false;
         }
-        else 
+        else if (creatureState == Define.CreatureState.Traped)
+        {
+            if (!_didPlayTrapOnce)
+            {
+                _didPlayTrapOnce = true;
+                StartCoroutine(CoPlayOnceAndHold(trapStateName, 0.2f)); // 천천히 재생
+            }
+        }
+        else if (creatureState == Define.CreatureState.Dead) 
+        {
+            if (!_didPlayDeadOnce) 
+            {
+                _didPlayDeadOnce = true;
+                StartCoroutine(CoPlayDeadOnceAndHold(deadStateName, 0.2f)); // 천천히 재생
+            }
+        }
+        else
         {
             animator.speed = 1f;
             // 1) 현재 FSM/방향 → 재생할 상태 이름
@@ -220,5 +246,80 @@ public class PlayerController : MonoBehaviour
             Define.Direction.Right => MoveRightState,
             _ => MoveFrontState
         };
+    }
+
+    public void Traped() 
+    {
+        creatureState = Define.CreatureState.Traped;  
+    }
+
+
+    private IEnumerator CoPlayOnceAndHold(string stateName, float playSpeed = 1f)
+    {
+        // 1) 처음부터 재생
+        animator.speed = playSpeed;
+        animator.Play(stateName, 0, 0f);
+        animator.Update(0f); // 즉시 평가(길이 계산 안정화용)
+
+        // 2) 클립 길이 얻기
+        float clipLen = FindClipLength(stateName);
+        if (clipLen <= 0f)
+        {
+            // 못 찾으면 안전빵으로 0.5초 가정
+            clipLen = 0.5f;
+        }
+
+        // 3) 끝까지 기다렸다가
+        yield return new WaitForSeconds(clipLen / Mathf.Max(0.0001f, playSpeed));
+
+        // 4) 마지막 프레임으로 점프 + 정지
+        animator.Play(stateName, 0, 0.999f);
+        animator.Update(0f);
+        animator.speed = 0f;
+
+        // 여기서 플레이어 상태갑 사망으로 변경
+        creatureState = Define.CreatureState.Dead;
+    }
+
+
+    private IEnumerator CoPlayDeadOnceAndHold(string stateName, float playSpeed = 1f)
+    {
+        // 1) 처음부터 재생
+        animator.speed = playSpeed;
+        animator.Play(stateName, 0, 0f);
+        animator.Update(0f); // 즉시 평가(길이 계산 안정화용)
+
+        // 2) 클립 길이 얻기
+        float clipLen = FindClipLength(stateName);
+        if (clipLen <= 0f)
+        {
+            // 못 찾으면 안전빵으로 0.5초 가정
+            clipLen = 0.5f;
+        }
+
+        // 3) 끝까지 기다렸다가
+        yield return new WaitForSeconds(clipLen / Mathf.Max(0.0001f, playSpeed));
+
+        // 4) 마지막 프레임으로 점프 + 정지
+        animator.Play(stateName, 0, 0.999f);
+        animator.Update(0f);
+        animator.speed = 0f;
+
+        TileMapManager.PlayerDict.Remove(1);
+        Destroy(gameObject);
+    }
+
+
+    // AnimatorController에서 클립 길이 찾기
+    private float FindClipLength(string clipName)
+    {
+        var rc = animator.runtimeAnimatorController;
+        if (rc == null) return 0f;
+        foreach (var clip in rc.animationClips)
+        {
+            if (clip != null && clip.name == clipName)
+                return clip.length;
+        }
+        return 0f;
     }
 }
